@@ -14,6 +14,7 @@ import { createContactSchema } from "../validation/contacts.js";
 import { updateContactSchema } from "../validation/contacts.js";
 import { isValidId } from "../middlewares/isValidId.js";
 import { authenticate } from "../middlewares/authenticate.js";
+import { upload } from "../middlewares/multer.js";
 // import { checkRoles } from '../middlewares/checkRoles.js';
 // import { ROLES } from '../constants/index.js';
 
@@ -27,6 +28,7 @@ router.delete("/:contactId", isValidId, ctrlWrapper(deleteContactController));
 router.post(
   "/",
   jsonParser,
+  upload.single("photo"),
   validateBody(createContactSchema),
   ctrlWrapper(createContactsController)
 );
@@ -34,6 +36,7 @@ router.put(
   "/:contactId",
   jsonParser,
   isValidId,
+  upload.single("photo"),
   validateBody(createContactSchema),
   ctrlWrapper(upsertContactController)
 );
@@ -41,6 +44,7 @@ router.patch(
   "/:contactId",
   jsonParser,
   isValidId,
+  upload.single("photo"),
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController)
 );
