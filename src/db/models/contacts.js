@@ -30,12 +30,12 @@ const contactsSchema = new mongoose.Schema(
       required: true,
       ref: "users",
     },
+
     photo: {
       type: String,
       default: null,
     },
   },
-
   {
     timestamps: true,
     versionKey: false,
